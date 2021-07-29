@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddCardText from './AddCardText'
 import EditCardText from './EditCardText'
 
@@ -12,6 +12,19 @@ const Cards = (props) => {
     // error -> to store & display validations on screen
     const [error, setError] = useState('')
 
+    // Below logic for useEffect will take the localStorage 'move' to add it in newly assigned Cards array
+    const moveCardText = JSON.parse(localStorage.getItem('move'))
+    useEffect(() => {
+        if (moveCardText && (moveCardText.toLabel === props.label)) {
+            const cardWithLabel = {
+                label: moveCardText.toLabel,
+                card: moveCardText.toCardText
+            }
+
+            setCards([cardWithLabel])
+            localStorage.removeItem('move')
+        }
+    }, [props.label, moveCardText])
 
     const onAddCardText = (addCardInput) => {
         // Each card will be associated to its parent label
@@ -24,6 +37,7 @@ const Cards = (props) => {
         setError('')
     }
 
+    // Edit card
     const onEditClick = (e) => {
         console.log(e.target.value)
         setEditTextIndex(Number(e.target.value))
@@ -45,22 +59,24 @@ const Cards = (props) => {
         setEditTextIndex('')
     }
 
+    // Remove card
     const onClickRemove = (idx) => {
         cards.splice(idx, 1)
         setCards([...cards])
     }
 
+    // Select move card
     const onSelectChange = (e, card) => {
         setSelectVal(e.target.value)
+        console.log(e.target.value)
 
         localStorage.setItem('move', JSON.stringify({
             toLabel: e.target.value,
             toCardText: card
         }))
-
-        console.log(selectVal)
     };
 
+    // Move card
     const onMoveClick = (e) => {
         e.preventDefault()
 
@@ -70,6 +86,7 @@ const Cards = (props) => {
             return setError('Select different label')
         }
         onClickRemove(e.target.value)
+        props.onClickMove()
     }
 
     return (

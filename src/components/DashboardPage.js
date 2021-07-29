@@ -5,12 +5,18 @@ import Cards from './Cards'
 const DashboardPage = () => {
     // labels -> array of stored labels
     const [labels, setLabels] = useState([])
+    // rerender the page upon change
+    const [renderPage, setRenderPage] = useState(false)
     // error -> to store & display validations on screen
     const [error, setError] = useState('')
 
     const onAddLabel = (addLabelText) => {
         setLabels([...labels, addLabelText])
         setError('')
+    }
+
+    const onClickMove = () => {
+        setRenderPage(!renderPage)
     }
 
     return (
@@ -35,6 +41,7 @@ const DashboardPage = () => {
                                         key={label}
                                         labels={labels}
                                         label={label}
+                                        onClickMove={onClickMove}
                                     />
                                 </td>
                             </tr>
