@@ -7,6 +7,10 @@ const EditCardText = (props) => {
     const onSubmit = (e) => {
         e.preventDefault()
 
+        if (editCardInput === props.card) {
+            return setError('Text cannot be same!')
+        }
+
         props.onEditCardText(editCardInput, props.index)
     }
 
