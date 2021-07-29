@@ -8,6 +8,7 @@ const Cards = (props) => {
     const [error, setError] = useState('')
 
     const onAddCardText = (addCardInput) => {
+        // Each card will be associated to its parent label
         const cardWithLabel = {
             label: props.label,
             card: addCardInput
@@ -23,6 +24,17 @@ const Cards = (props) => {
             <AddCardText
                 onAddCardText={onAddCardText}
             />
+            {
+                cards.length !== 0 &&
+                cards.map((card) => card.card)
+                    .map((card, idx) => {
+                        return (
+                            <div key={idx}>
+                                <p>{card}</p>
+                            </div>
+                        )
+                    })
+            }
         </div>
     )
 }

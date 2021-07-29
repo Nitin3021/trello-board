@@ -32,6 +32,7 @@ const DashboardPage = () => {
                             <tr>
                                 <td>
                                     <Cards
+                                        key={label}
                                         labels={labels}
                                         label={label}
                                     />
