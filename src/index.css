@@ -20,3 +20,29 @@ code {
   width: fit-content;
   table-layout: fixed;
 }
+
+#table-trello td,
+#table-trello th {
+  width: 250px;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+#table-trello th {
+  background-color: lightblue;
+  border-right: 3px solid grey;
+  border-bottom: 3px solid grey;
+}
+
+.card-style {
+  border: 3px solid grey;
+  margin: 10px 0;
+}
+
+form {
+  margin: 10px 0;
+}
+
+button {
+  margin: 0 2px;
+}

@@ -108,8 +108,10 @@ const Cards = (props) => {
         if (selectVal === props.label) {
             return setError('Select different label')
         }
+
         onClickRemove(e.target.value)
         props.onClickMove()
+        setSelectVal(props.label)
     }
 
     return (
@@ -123,7 +125,7 @@ const Cards = (props) => {
                 cards.map((card) => card.card)
                     .map((card, idx) => {
                         return (
-                            <div key={idx}>
+                            <div className="card-style" key={idx}>
                                 <p>{card}</p>
                                 <button
                                     value={idx}
