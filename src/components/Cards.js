@@ -6,6 +6,8 @@ const Cards = (props) => {
     const [cards, setCards] = useState([])
     // error -> to store & display validations on screen
     const [error, setError] = useState('')
+    const [editCardInput, setCardInput] = useState('')
+    const [editText, setEditText] = useState('')
 
     const onAddCardText = (addCardInput) => {
         // Each card will be associated to its parent label
@@ -16,6 +18,18 @@ const Cards = (props) => {
 
         setCards([...cards, cardWithLabel])
         setError('')
+    }
+
+    const onEditClick = (e) => {
+        console.log(e.target.value)
+        setEditText(Number(e.target.value))
+        console.log(editText)
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+
+        console.log(editCardInput)
     }
 
     return (
@@ -31,6 +45,24 @@ const Cards = (props) => {
                         return (
                             <div key={idx}>
                                 <p>{card}</p>
+                                <button
+                                    value={idx}
+                                    type='button'
+                                    onClick={onEditClick}
+                                >
+                                    Edit
+                                </button>
+                                <div>
+                                    <form onSubmit={onSubmit}>
+                                        <input
+                                            type="text"
+                                            placeholder="Edit Card Text"
+                                            value={editCardInput}
+                                            onChange={(e) => { setCardInput(e.target.value) }}
+                                        />
+                                        <button>Submit</button>
+                                    </form>
+                                </div>
                             </div>
                         )
                     })
