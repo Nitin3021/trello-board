@@ -23,7 +23,6 @@ const Cards = (props) => {
     const onEditClick = (e) => {
         console.log(e.target.value)
         setEditText(Number(e.target.value))
-        console.log(editText)
     }
 
     const onEditCardText = (editedCardText, idx) => {
@@ -40,6 +39,11 @@ const Cards = (props) => {
 
         setCards([...newCardArray])
         setEditText('')
+    }
+
+    const onClickRemove = (idx) => {
+        cards.splice(idx, 1)
+        setCards([...cards])
     }
 
     return (
@@ -71,6 +75,12 @@ const Cards = (props) => {
                                         />
                                     ) : null
                                 }
+                                <button
+                                    value={idx}
+                                    onClick={(e) => onClickRemove(e.target.value)}
+                                >
+                                    Remove
+                                </button>
                             </div>
                         )
                     })
