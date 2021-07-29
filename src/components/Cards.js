@@ -61,6 +61,17 @@ const Cards = (props) => {
         console.log(selectVal)
     };
 
+    const onMoveClick = (e) => {
+        e.preventDefault()
+
+        console.log(selectVal, props.label)
+
+        if (selectVal === props.label) {
+            return setError('Select different label')
+        }
+        onClickRemove(e.target.value)
+    }
+
     return (
         <div>
             {error && <p>{error}</p>}
@@ -114,6 +125,13 @@ const Cards = (props) => {
                                         })
                                     }
                                 </select>
+                                <button
+                                    value={idx}
+                                    type='button'
+                                    onClick={onMoveClick}
+                                >
+                                    Move
+                                </button>
                             </div>
                         )
                     })
