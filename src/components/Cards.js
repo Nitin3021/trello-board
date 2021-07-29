@@ -52,7 +52,6 @@ const Cards = (props) => {
 
     // Edit card
     const onEditClick = (e) => {
-        console.log(e.target.value)
         setEditTextIndex(Number(e.target.value))
     }
 
@@ -81,19 +80,20 @@ const Cards = (props) => {
     // Select move card
     const onSelectChange = (e, card) => {
         setSelectVal(e.target.value)
-        console.log(e.target.value)
 
-        localStorage.setItem('move', JSON.stringify({
-            toLabel: e.target.value,
-            toCardText: card
-        }))
+        if (e.target.value !== props.label) {
+            localStorage.setItem('move', JSON.stringify({
+                toLabel: e.target.value,
+                toCardText: card
+            }))
+        } else {
+            localStorage.removeItem('move')
+        }
     };
 
     // Move card
     const onMoveClick = (e) => {
         e.preventDefault()
-
-        console.log(selectVal, props.label)
 
         if (selectVal === props.label) {
             return setError('Select different label')
