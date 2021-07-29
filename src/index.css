@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#table-trello {
+  display: flex;
+  border-collapse: collapse;
+  border: 3px solid grey;
+  font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+  width: fit-content;
+  table-layout: fixed;
+}

@@ -1,24 +1,16 @@
 import React, { useState } from 'react'
-import AddCardText from './AddCardText'
 import AddLabelText from './AddLabelText'
+import Cards from './Cards'
 
 const DashboardPage = () => {
     // labels -> array of stored labels
     const [labels, setLabels] = useState([])
-    // cards -> array of stored cards
-    const [cards, setCards] = useState([])
     // error -> to store & display validations on screen
     const [error, setError] = useState('')
 
     const onAddLabel = (addLabelText) => {
         setLabels([...labels, addLabelText])
         setError('')
-    }
-
-    const onAddCardText = (addCardInput) => {
-        setCards([...cards, addCardInput])
-        setError('')
-        console.log(cards)
     }
 
     return (
@@ -31,14 +23,17 @@ const DashboardPage = () => {
             {
                 labels.length !== 0 &&
 
-                <table>
+                <table id="table-trello">
                     {labels.map((label) => (
                         <thead key={label}>
                             <tr>
                                 <th>{label}</th>
+                            </tr>
+                            <tr>
                                 <td>
-                                    <AddCardText
-                                        onAddCardText={onAddCardText}
+                                    <Cards
+                                        labels={labels}
+                                        label={label}
                                     />
                                 </td>
                             </tr>
