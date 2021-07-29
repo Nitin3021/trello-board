@@ -6,6 +6,7 @@ const AddCardText = (props) => {
     // error -> to store & display validations on screen
     const [error, setError] = useState('')
 
+    // Function will validate and pass the newly added Card back to caller.
     const onSubmit = (e) => {
         e.preventDefault()
 

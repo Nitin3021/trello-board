@@ -16,6 +16,17 @@ This pure ReactJS based application is depicting a Trello board. It will allow u
   - Move: Movement of cards can be triggered by selecting dropdown menu option and then click Move.
   - Validations persists the user to not perform transactions wherein the select dropdown is the same label as the destination label, card description is same as the edited card, etc.
 
+## Components
+
+- Header - Will render only a simple header title.
+- DashboardPage - Renders a table to contain newly added labels and their corresponding cards.
+- Cards - Provides buttons for actions to be performed on the card.
+- AddLabelText - Will render a form to validate & add new labels.
+- AddCardText - Will render a form to validate & add new cards.
+- EditCardText - Validates the text to be edited and passes back the newly edited text.
+
+localStorage has been used to persist data.
+
 ## Installation
 
 Recommended to use npm for installation of modules.

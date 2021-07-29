@@ -4,6 +4,7 @@ const EditCardText = (props) => {
     const [editCardInput, setCardInput] = useState(props.card)
     const [error, setError] = useState('')
 
+    // Function will validate and pass the new edited text back to caller.
     const onSubmit = (e) => {
         e.preventDefault()
 

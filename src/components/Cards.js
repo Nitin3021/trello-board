@@ -60,11 +60,12 @@ const Cards = (props) => {
         setError('')
     }
 
-    // Save Edit card index & proceed to edit text
+    // Save Edit card index
     const onEditClick = (e) => {
         setEditTextIndex(Number(e.target.value))
     }
 
+    // Proceed to edit text
     const onEditCardText = (editedCardText, idx) => {
         const newCardArray = cards.map((card, index) => {
             if (index !== idx) {
