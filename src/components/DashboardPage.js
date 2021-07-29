@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
+import AddLabelText from './AddLabelText'
 
 const DashboardPage = () => {
     // labels -> array of stored labels
     const [labels, setLabels] = useState([])
     // addLabelText -> handler for label text
-    const [addLabelText, setAddLabelText] = useState('')
-    // error -> to store & display validations on screen
 
     const [cards, setCards] = useState([])
     const [addCardInput, setAddCardInput] = useState('')
+    // error -> to store & display validations on screen
     const [error, setError] = useState('')
 
     const onAddLabel = (addLabelText) => {
@@ -20,18 +20,6 @@ const DashboardPage = () => {
         setCards([...cards, addCardInput])
         setError('')
         console.log(cards)
-    }
-
-    const onSubmit = (e) => {
-        e.preventDefault()
-
-        if (addLabelText === '') {
-            return setError('Label cannot be blank!')
-        }
-
-        setError('')
-        setAddLabelText('')
-        onAddLabel(addLabelText)
     }
 
     const onSubmitCard = (e) => {
@@ -49,15 +37,10 @@ const DashboardPage = () => {
     return (
         <div>
             {error && <p>{error}</p>}
-            <form onSubmit={onSubmit}>
-                <input
-                    type="text"
-                    placeholder="Enter label"
-                    value={addLabelText}
-                    onChange={(e) => { setAddLabelText(e.target.value) }}
-                />
-                <button>Submit</button>
-            </form>
+            <AddLabelText
+                onAddLabel={onAddLabel}
+                labels={labels}
+            />
             {
                 labels.length !== 0 &&
 
