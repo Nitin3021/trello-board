@@ -13,6 +13,8 @@ const Cards = (props) => {
     const [error, setError] = useState('')
 
     // Below logic for useEffect will take the localStorage 'move' to add it in newly assigned Cards array
+    // localStorage defined within useEffect will retreive existing data belonging to that label 
+    // & append the new Card to prevent override.
     const moveCardText = JSON.parse(localStorage.getItem('move'))
     useEffect(() => {
         if (moveCardText && (moveCardText.toLabel === props.label)) {
@@ -21,10 +23,21 @@ const Cards = (props) => {
                 card: moveCardText.toCardText
             }
 
-            setCards([cardWithLabel])
+            const data = JSON.parse(localStorage.getItem(props.label))
+
+            setCards([...data, cardWithLabel])
             localStorage.removeItem('move')
         }
     }, [props.label, moveCardText])
+
+    // useEffect will store all the card details for current component label
+    useEffect(() => {
+        if (cards && cards.length !== 0) {
+            localStorage.setItem(props.label, JSON.stringify(cards))
+        } else {
+            localStorage.setItem(props.label, JSON.stringify([]))
+        }
+    }, [props.label, cards])
 
     const onAddCardText = (addCardInput) => {
         // Each card will be associated to its parent label
