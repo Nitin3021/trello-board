@@ -36,8 +36,10 @@ const DashboardPage = () => {
         setRenderPage(!renderPage)
     }
 
+    // onClear will clear localStorage and refresh the page.
     const onClear = () => {
         localStorage.clear()
+        window.location.reload()
     }
 
     return (
