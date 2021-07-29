@@ -5,9 +5,13 @@ import EditCardText from './EditCardText'
 const Cards = (props) => {
     // cards -> array of stored cards
     const [cards, setCards] = useState([])
+    // selectVal -> select option to initiate move
+    const [selectVal, setSelectVal] = useState(props.label)
+    // editText ->
+    const [editTextIndex, setEditTextIndex] = useState('')
     // error -> to store & display validations on screen
     const [error, setError] = useState('')
-    const [editText, setEditText] = useState('')
+
 
     const onAddCardText = (addCardInput) => {
         // Each card will be associated to its parent label
@@ -22,7 +26,7 @@ const Cards = (props) => {
 
     const onEditClick = (e) => {
         console.log(e.target.value)
-        setEditText(Number(e.target.value))
+        setEditTextIndex(Number(e.target.value))
     }
 
     const onEditCardText = (editedCardText, idx) => {
@@ -38,13 +42,24 @@ const Cards = (props) => {
         })
 
         setCards([...newCardArray])
-        setEditText('')
+        setEditTextIndex('')
     }
 
     const onClickRemove = (idx) => {
         cards.splice(idx, 1)
         setCards([...cards])
     }
+
+    const onSelectChange = (e, card) => {
+        setSelectVal(e.target.value)
+
+        localStorage.setItem('move', JSON.stringify({
+            toLabel: e.target.value,
+            toCardText: card
+        }))
+
+        console.log(selectVal)
+    };
 
     return (
         <div>
@@ -67,7 +82,7 @@ const Cards = (props) => {
                                     Edit
                                 </button>
                                 {
-                                    editText === idx ? (
+                                    editTextIndex === idx ? (
                                         <EditCardText
                                             onEditCardText={onEditCardText}
                                             index={idx}
@@ -81,6 +96,24 @@ const Cards = (props) => {
                                 >
                                     Remove
                                 </button>
+                                <select
+                                    onChange={(e) => onSelectChange(e, card)}
+                                    defaultValue={props.label}
+                                >
+                                    {
+                                        props.labels.map((label) => {
+                                            return (
+                                                <option
+                                                    key={label}
+                                                    value={label}
+                                                    card={card}
+                                                >
+                                                    {label}
+                                                </option>
+                                            )
+                                        })
+                                    }
+                                </select>
                             </div>
                         )
                     })
