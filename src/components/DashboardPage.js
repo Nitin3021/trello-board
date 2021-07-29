@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
+import AddCardText from './AddCardText'
 import AddLabelText from './AddLabelText'
 
 const DashboardPage = () => {
     // labels -> array of stored labels
     const [labels, setLabels] = useState([])
-    // addLabelText -> handler for label text
-
+    // cards -> array of stored cards
     const [cards, setCards] = useState([])
-    const [addCardInput, setAddCardInput] = useState('')
     // error -> to store & display validations on screen
     const [error, setError] = useState('')
 
@@ -20,18 +19,6 @@ const DashboardPage = () => {
         setCards([...cards, addCardInput])
         setError('')
         console.log(cards)
-    }
-
-    const onSubmitCard = (e) => {
-        e.preventDefault()
-
-        if (addCardInput === '') {
-            return setError('Enter Card text!')
-        }
-
-        setAddCardInput('')
-        setError('')
-        onAddCardText(addCardInput)
     }
 
     return (
@@ -50,17 +37,9 @@ const DashboardPage = () => {
                             <tr>
                                 <th>{label}</th>
                                 <td>
-                                    <div>
-                                        <form onSubmit={onSubmitCard}>
-                                            <input
-                                                type="text"
-                                                placeholder="Enter Cards"
-                                                value={addCardInput}
-                                                onChange={(e) => { setAddCardInput(e.target.value) }}
-                                            />
-                                            <button>Submit</button>
-                                        </form>
-                                    </div>
+                                    <AddCardText
+                                        onAddCardText={onAddCardText}
+                                    />
                                 </td>
                             </tr>
                         </thead>
