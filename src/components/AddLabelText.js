@@ -13,7 +13,8 @@ const AddLabelText = (props) => {
             return setError('Label cannot be blank!')
         }
 
-        if (props.labels.indexOf(addLabelText) !== -1) {
+        const duplicateLabel = props.labels.find((label) => label.toLowerCase() === addLabelText.toLowerCase())
+        if (duplicateLabel) {
             return setError('Label already exists!')
         }
 

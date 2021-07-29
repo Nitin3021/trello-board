@@ -48,6 +48,7 @@ const Cards = (props) => {
         }
     }, [props.label, cards])
 
+    // Add card text and save it using setCards
     const onAddCardText = (addCardInput) => {
         // Each card will be associated to its parent label
         const cardWithLabel = {
