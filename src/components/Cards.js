@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import AddCardText from './AddCardText'
+import EditCardText from './EditCardText'
 
 const Cards = (props) => {
     // cards -> array of stored cards
     const [cards, setCards] = useState([])
     // error -> to store & display validations on screen
     const [error, setError] = useState('')
-    const [editCardInput, setCardInput] = useState('')
     const [editText, setEditText] = useState('')
 
     const onAddCardText = (addCardInput) => {
@@ -26,10 +26,20 @@ const Cards = (props) => {
         console.log(editText)
     }
 
-    const onSubmit = (e) => {
-        e.preventDefault()
+    const onEditCardText = (editedCardText, idx) => {
+        const newCardArray = cards.map((card, index) => {
+            if (index !== idx) {
+                return { ...card }
+            }
 
-        console.log(editCardInput)
+            return {
+                label: card.label,
+                card: editedCardText
+            }
+        })
+
+        setCards([...newCardArray])
+        setEditText('')
     }
 
     return (
@@ -52,17 +62,15 @@ const Cards = (props) => {
                                 >
                                     Edit
                                 </button>
-                                <div>
-                                    <form onSubmit={onSubmit}>
-                                        <input
-                                            type="text"
-                                            placeholder="Edit Card Text"
-                                            value={editCardInput}
-                                            onChange={(e) => { setCardInput(e.target.value) }}
+                                {
+                                    editText === idx ? (
+                                        <EditCardText
+                                            onEditCardText={onEditCardText}
+                                            index={idx}
+                                            card={card}
                                         />
-                                        <button>Submit</button>
-                                    </form>
-                                </div>
+                                    ) : null
+                                }
                             </div>
                         )
                     })
