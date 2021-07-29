@@ -11,7 +11,6 @@ const DashboardPage = () => {
     const onAddLabel = (addLabelText) => {
         setLabels([...labels, addLabelText])
         setError('')
-        console.log(labels)
     }
 
     const onSubmit = (e) => {
@@ -38,6 +37,19 @@ const DashboardPage = () => {
                 />
                 <button>Submit</button>
             </form>
+            {
+                labels.length !== 0 &&
+
+                <table>
+                    {labels.map((label) => (
+                        <thead key={label}>
+                            <tr>
+                                <td>{label}</td>
+                            </tr>
+                        </thead>
+                    ))}
+                </table>
+            }
         </div>
     )
 }
