@@ -12,6 +12,15 @@ const Cards = (props) => {
     // error -> to store & display validations on screen
     const [error, setError] = useState('')
 
+    // useEffect will retreive all the cards in localStorage to persist data on refresh
+    useEffect(() => {
+        const cardsData = JSON.parse(localStorage.getItem(props.label))
+
+        if (cardsData && cardsData.length !== 0) {
+            setCards([...cardsData])
+        }
+    }, [props.label])
+
     // Below logic for useEffect will take the localStorage 'move' to add it in newly assigned Cards array
     // localStorage defined within useEffect will retreive existing data belonging to that label 
     // & append the new Card to prevent override.
