@@ -6,11 +6,20 @@ const DashboardPage = () => {
     // addLabelText -> handler for label text
     const [addLabelText, setAddLabelText] = useState('')
     // error -> to store & display validations on screen
+
+    const [cards, setCards] = useState([])
+    const [addCardInput, setAddCardInput] = useState('')
     const [error, setError] = useState('')
 
     const onAddLabel = (addLabelText) => {
         setLabels([...labels, addLabelText])
         setError('')
+    }
+
+    const onAddCardText = (addCardInput) => {
+        setCards([...cards, addCardInput])
+        setError('')
+        console.log(cards)
     }
 
     const onSubmit = (e) => {
@@ -23,6 +32,18 @@ const DashboardPage = () => {
         setError('')
         setAddLabelText('')
         onAddLabel(addLabelText)
+    }
+
+    const onSubmitCard = (e) => {
+        e.preventDefault()
+
+        if (addCardInput === '') {
+            return setError('Enter Card text!')
+        }
+
+        setAddCardInput('')
+        setError('')
+        onAddCardText(addCardInput)
     }
 
     return (
@@ -44,7 +65,20 @@ const DashboardPage = () => {
                     {labels.map((label) => (
                         <thead key={label}>
                             <tr>
-                                <td>{label}</td>
+                                <th>{label}</th>
+                                <td>
+                                    <div>
+                                        <form onSubmit={onSubmitCard}>
+                                            <input
+                                                type="text"
+                                                placeholder="Enter Cards"
+                                                value={addCardInput}
+                                                onChange={(e) => { setAddCardInput(e.target.value) }}
+                                            />
+                                            <button>Submit</button>
+                                        </form>
+                                    </div>
+                                </td>
                             </tr>
                         </thead>
                     ))}
