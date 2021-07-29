@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddLabelText from './AddLabelText'
 import Cards from './Cards'
 
@@ -10,11 +10,28 @@ const DashboardPage = () => {
     // error -> to store & display validations on screen
     const [error, setError] = useState('')
 
+    // useEffect will retreive all the cards in localStorage to persist data on refresh
+    useEffect(() => {
+        const labelsData = JSON.parse(localStorage.getItem('labels'))
+        if (labelsData && labelsData.length !== 0) {
+            setLabels([...labelsData])
+        }
+    }, [])
+
+    // useEffect will store all the label details
+    useEffect(() => {
+        if (labels && labels.length !== 0) {
+            localStorage.setItem('labels', JSON.stringify(labels))
+        }
+    }, [labels])
+
+    // onAddLabel will add the new label upon form submit from AddLabelText component
     const onAddLabel = (addLabelText) => {
         setLabels([...labels, addLabelText])
         setError('')
     }
 
+    // onClickMove will be called from Cards component to rerender the whole list
     const onClickMove = () => {
         setRenderPage(!renderPage)
     }

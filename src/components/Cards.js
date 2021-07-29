@@ -7,7 +7,7 @@ const Cards = (props) => {
     const [cards, setCards] = useState([])
     // selectVal -> select option to initiate move
     const [selectVal, setSelectVal] = useState(props.label)
-    // editText ->
+    // editTextIndex -> Will store the index of the text to be edited
     const [editTextIndex, setEditTextIndex] = useState('')
     // error -> to store & display validations on screen
     const [error, setError] = useState('')
@@ -59,7 +59,7 @@ const Cards = (props) => {
         setError('')
     }
 
-    // Edit card
+    // Save Edit card index & proceed to edit text
     const onEditClick = (e) => {
         setEditTextIndex(Number(e.target.value))
     }
@@ -80,13 +80,13 @@ const Cards = (props) => {
         setEditTextIndex('')
     }
 
-    // Remove card
+    // Remove card using index of array
     const onClickRemove = (idx) => {
         cards.splice(idx, 1)
         setCards([...cards])
     }
 
-    // Select move card
+    // Select move card will allow component to store the movement details prior to 'Move' button click
     const onSelectChange = (e, card) => {
         setSelectVal(e.target.value)
 
@@ -100,7 +100,7 @@ const Cards = (props) => {
         }
     };
 
-    // Move card
+    // Move card upon clicking 'Move' button
     const onMoveClick = (e) => {
         e.preventDefault()
 
