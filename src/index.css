@@ -12,6 +12,14 @@ code {
     monospace;
 }
 
+.header__title {
+  border-bottom: 2px solid gray;
+  display: flex;
+  font-size: 21px;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
 #table-trello {
   display: flex;
   border-collapse: collapse;
@@ -45,4 +53,9 @@ form {
 
 button {
   margin: 0 2px;
+}
+
+.button__erase {
+  margin-right: 10px;
+  float: right;
 }

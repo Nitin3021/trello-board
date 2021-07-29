@@ -36,9 +36,20 @@ const DashboardPage = () => {
         setRenderPage(!renderPage)
     }
 
+    const onClear = () => {
+        localStorage.clear()
+    }
+
     return (
         <div>
             {error && <p>{error}</p>}
+            <button
+                type="button"
+                className="button__erase"
+                onClick={onClear}
+            >
+                Clear Board
+            </button>
             <AddLabelText
                 onAddLabel={onAddLabel}
                 labels={labels}
